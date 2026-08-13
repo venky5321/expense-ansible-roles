@@ -28,6 +28,6 @@
      value: "{{ item.private_ip_address }}"
      overwrite: true
      ttl: 1
-    loop: "{{ ec2_instance_info.results.instance }}"
+    loop: "{{ ec2_instance_info.results.instances }}"
 
 
