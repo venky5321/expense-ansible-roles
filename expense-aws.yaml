@@ -12,12 +12,12 @@
       tags:
         Name: "{{ item }}"
 
-    loop: "{{ instance }}"
-    register: ec2_instance_info
+    loop: "{{ instances }}"
+    register: ec2_instances_info
 
   - name: print output
     ansible.builtin.debug:
-       msg: "Output: {{ ec2_instance_info }}"
+       msg: "Output: {{ ec2_instances_info }}"
 
   - name: create r53 records
     amazon.aws.route53:
@@ -25,9 +25,9 @@
      zone: "{{ zone }}"
      record: "{{ item }}.{{ zone }}"
      type: A
-     value: "{{ item.instance.private_ip_address }}"
+     value: "{{ item.instances.private_ip_address }}"
      overwrite: true
      ttl: 1
-    loop: "{{ ec2_instance_info.results }}"
+    loop: "{{ ec2_instances_info.results }}"
 
 
