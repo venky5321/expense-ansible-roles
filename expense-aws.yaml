@@ -12,8 +12,7 @@
       tags:
         Name: "{{ item }}"
 
-    loop:
-    - "{{ instance }}"
+    loop: "{{ instance }}"
     register: ec2_instance_info
 
   - name: print output
